@@ -5,12 +5,14 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
   emailChanged,
-  passwordChanged
+  passwordChanged,
+  loginUser
 } from '../actions';
 
 class LoginForm extends Component {
@@ -20,6 +22,23 @@ class LoginForm extends Component {
 
   onPasswordChanged (text) {
     this.props.passwordChanged(text);
+  }
+
+  onLoginUser() {
+    const { email, password } = this.props;
+    this.props.loginUser(email, password);
+  }
+
+  renderButton() {
+    if(this.props.loading) {
+      return (<ActivityIndicator />);
+    } else {
+      return (
+        <TouchableOpacity style={style.loginBtn} activeOpacity={0.8} onPress={this.onLoginUser.bind(this)}>
+          <Text style={style.loginBtnText}>Login</Text>
+        </TouchableOpacity>
+      );
+    }
   }
 
   render() {
@@ -37,9 +56,7 @@ class LoginForm extends Component {
           onChangeText={ this.onPasswordChanged.bind(this) }
           value={ this.props.password }
         />
-        <TouchableOpacity style={style.loginBtn} activeOpacity={0.8}>
-          <Text style={style.loginBtnText}>Login</Text>
-        </TouchableOpacity>
+        {this.renderButton()}
       </View>
     );
   } 
@@ -69,11 +86,13 @@ const style = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     email: state.auth.email,
-    password: state.auth.password
+    password: state.auth.password,
+    loading: state.auth.loading
   }
 };
 
 export default connect(mapStateToProps, {
   emailChanged,
-  passwordChanged
+  passwordChanged,
+  loginUser
 })(LoginForm);

@@ -1,11 +1,13 @@
 import {
   EMAIL_CHANGED,
-  PASSWORD_CHANGED
+  PASSWORD_CHANGED,
+  USER_LOGIN_ATTEMPT
 } from '../actions/types';
 
 const INITIAL_STATE = {
   email: '',
-  password: ''
+  password: '',
+  loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +18,10 @@ export default (state = INITIAL_STATE, action) => {
     
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload }
+      break;
+
+    case USER_LOGIN_ATTEMPT:
+      return { ...state, loading: true }
       break;
   
     default:
