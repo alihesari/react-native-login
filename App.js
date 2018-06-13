@@ -14,6 +14,7 @@ import {
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './src/reducers';
+import LoginForm from './src/components/LoginForm';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -28,7 +29,7 @@ export default class App extends Component<Props> {
     return (
       <Provider store={createStore(reducers) }>
         <View style={styles.container}>
-          <Text>React Native login</Text>
+          <LoginForm />
         </View>
       </Provider>
     );
