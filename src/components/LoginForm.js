@@ -7,18 +7,35 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
+import {
+  emailChanged,
+  passwordChanged
+} from '../actions';
 
 class LoginForm extends Component {
+  onEmailChanged (text) {
+    this.props.emailChanged(text);
+  }
+
+  onPasswordChanged (text) {
+    this.props.passwordChanged(text);
+  }
+
   render() {
     return (
       <View style={style.loginForm}>
         <Text style={style.pageTitle}>Login</Text>
         <TextInput
           placeholder="Email"
+          onChangeText={ this.onEmailChanged.bind(this) }
+          value={ this.props.email }
         />
         <TextInput
           placeholder="Password"
           secureTextEntry={true}
+          onChangeText={ this.onPasswordChanged.bind(this) }
+          value={ this.props.password }
         />
         <TouchableOpacity style={style.loginBtn} activeOpacity={0.8}>
           <Text style={style.loginBtnText}>Login</Text>
@@ -49,4 +66,14 @@ const style = StyleSheet.create({
   }
 });
 
-export default LoginForm;
+const mapStateToProps = state => {
+  return {
+    email: state.auth.email,
+    password: state.auth.password
+  }
+};
+
+export default connect(mapStateToProps, {
+  emailChanged,
+  passwordChanged
+})(LoginForm);
