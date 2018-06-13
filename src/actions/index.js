@@ -29,7 +29,6 @@ export const loginUser = ({email, password}) => {
     fetch('http://10.0.2.2:8000/api/users/authenticate', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -37,9 +36,10 @@ export const loginUser = ({email, password}) => {
         password: password
       })
     }).then(response => {
+      if(response.status !== 200) return false;
       return response.json();
     }).then(data => {
-      if(data.status === true) {
+      if(data !== false) {
         loginUserSuccess(dispatch);
       } else {
         loginUserFail(dispatch);

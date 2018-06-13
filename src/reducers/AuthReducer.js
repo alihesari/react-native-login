@@ -9,7 +9,8 @@ import {
 const INITIAL_STATE = {
   email: '',
   password: '',
-  loading: false
+  loading: false,
+  error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -31,7 +32,7 @@ export default (state = INITIAL_STATE, action) => {
       break;
 
     case USER_LOGIN_FAIL:
-      return { ...state, loading: false, password: '' }
+      return { ...state, loading: false, password: '', error: 'Email or Password is wrong!' }
       break;
   
     default:

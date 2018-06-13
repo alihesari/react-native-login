@@ -45,6 +45,7 @@ class LoginForm extends Component {
     return (
       <View style={style.loginForm}>
         <Text style={style.pageTitle}>Login</Text>
+        <Text style={style.error}>{this.props.error}</Text>
         <TextInput
           placeholder="Email"
           onChangeText={ this.onEmailChanged.bind(this) }
@@ -80,6 +81,10 @@ const style = StyleSheet.create({
   loginBtnText: {
     color: '#fff',
     textAlign: 'center'
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center'
   }
 });
 
@@ -87,7 +92,8 @@ const mapStateToProps = state => {
   return {
     email: state.auth.email,
     password: state.auth.password,
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    error: state.auth.error
   }
 };
 
