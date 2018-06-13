@@ -14,7 +14,7 @@ class LoginForm extends Component {
       <View style={style.loginForm}>
         <Text style={style.pageTitle}>Login</Text>
         <TextInput
-          placeholder="Username"
+          placeholder="Email"
         />
         <TextInput
           placeholder="Password"
@@ -25,7 +25,7 @@ class LoginForm extends Component {
         </TouchableOpacity>
       </View>
     );
-  }
+  } 
 }
 
 const style = StyleSheet.create({
