@@ -43,27 +43,35 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <View style={style.loginForm}>
-        <Text style={style.pageTitle}>Login</Text>
-        <Text style={style.error}>{this.props.error}</Text>
-        <TextInput
-          placeholder="Email"
-          onChangeText={ this.onEmailChanged.bind(this) }
-          value={ this.props.email }
-        />
-        <TextInput
-          placeholder="Password"
-          secureTextEntry={true}
-          onChangeText={ this.onPasswordChanged.bind(this) }
-          value={ this.props.password }
-        />
-        {this.renderButton()}
+      <View style={style.container}>
+        <View style={style.loginForm}>
+          <Text style={style.pageTitle}>Login</Text>
+          <Text style={style.error}>{this.props.error}</Text>
+          <TextInput
+            placeholder="Email"
+            onChangeText={ this.onEmailChanged.bind(this) }
+            value={ this.props.email }
+          />
+          <TextInput
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={ this.onPasswordChanged.bind(this) }
+            value={ this.props.password }
+          />
+          {this.renderButton()}
+        </View>
       </View>
     );
   } 
 }
 
 const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
   pageTitle: {
     fontSize: 20,
     fontWeight: 'bold',
